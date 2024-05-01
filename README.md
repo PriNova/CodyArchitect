@@ -2,6 +2,12 @@
 
 CodyArchitect is an innovative program designed to revolutionize the way developers understand and navigate unfamiliar codebases. Powered by advanced Large Language Model (LLM) technology, CodyArchitect provides comprehensive overviews of a codebase's architecture, functionality, and conventions, making the onboarding process smoother and more efficient.
 
+**NOTE: This is a BUILD IN THE PUBLIC project and is not yet fully operational. You will find the documentation of the progress in the [doc](/docs/) folder**
+
+## Sponsorship
+
+If you find CodyArchitect valuable and would like to support its ongoing development, I am open to sponsorship. Your support will help me dedicate more time and resources to enhancing the program's features and functionality. Please reach out to me directly via [info@prinova.de](mailto:info@prinova.de?subject=Sponsorship%20CodyArchitect), over [Sourcegraph Discord](https://discord.gg/QVH2hc7a) to discuss sponsorship opportunities or use the sponsor button at the top.
+
 ## Key Features
 
 - **Language-Agnostic**: CodyArchitect is adaptable to various programming languages and codebases, providing a unified view of the entire project.
@@ -49,10 +55,6 @@ We have an exciting roadmap planned for CodyArchitect, including:
 ## Contribution Guidelines
 
 At this early stage of development, I am not accepting pull requests. However, I welcome feedback, suggestions, and bug reports through the issue tracker. Your input is valuable in shaping the future of CodyArchitect.
-
-## Sponsorship
-
-If you find CodyArchitect valuable and would like to support its ongoing development, I am open to sponsorship. Your support will help me dedicate more time and resources to enhancing the program's features and functionality. Please reach out to me directly to discuss sponsorship opportunities or use the sponsor button at the top.
 
 ## License
 
