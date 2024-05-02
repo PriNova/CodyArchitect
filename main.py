@@ -47,6 +47,7 @@ def collect_documentation_files(codebase_dir):
 
 
 def main(codebase_dir=None, output_dir=None):
+    setup_logger("CodyArchitect", "logs")
     if codebase_dir is None:
         # Create a command-line interface (CLI) for the program
         parser = argparse.ArgumentParser(description="CodyArchitect")
@@ -79,7 +80,5 @@ def main(codebase_dir=None, output_dir=None):
 
 
 if __name__ == "__main__":
-
-    setup_logger("CodyArchitect", "logs")
     codebase_dir = "."
     main(codebase_dir)
