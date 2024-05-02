@@ -46,7 +46,7 @@ Analyze the provided documentation and extract the most relevant information to 
     Please generate a concise summary that covers these key points based on the provided documentation. The summary should be clear, well-structured, and easy to understand for developers who are new to the project.
     """.strip()
 
-structured_prompt = """Please structure the extracted information from the documentation into a JSON format using the following guidelines:
+structured_prompt = """Please structure the extracted information from the below provided analysis into a JSON format using the following guidelines:
 
     1. Create a JSON object with the following keys:
     - "project_description"
@@ -98,7 +98,10 @@ structured_prompt = """Please structure the extracted information from the docum
             ]
         }
 
-    Please generate the JSON object based on the extracted information, following the provided guidelines and example format as raw string. Do not enclose the JSON object in triple backticks.
+    Please generate the JSON object based on the extracted information from the analysis below, following the provided guidelines and example format as raw string. Do not enclose the JSON object in triple backticks.
+
+    Analysis:
+
     """.strip()
 
 
@@ -131,6 +134,7 @@ async def new_chat(cody_agent: CodyAgent, model: Models = Models.Claude3Sonnet):
 
 async def document_analysis(documents: list, cody_agent: CodyAgent):
     # Perform analysis on the document content here
+    await new_chat(cody_agent=cody_agent)
     context_files = append_paths(*documents)
     (analysis, _) = await cody_agent.chat(
         message=prompt_analysis,
@@ -141,8 +145,9 @@ async def document_analysis(documents: list, cody_agent: CodyAgent):
     )
 
     # Perform Json formatting
+    await new_chat(cody_agent=cody_agent, model=Models.Claude3Haiku)
     (json_format, _) = await cody_agent.chat(
-        message=structured_prompt,
+        message=structured_prompt + analysis,
         enhanced_context=False,
         show_context_files=False,
         context_files=None,

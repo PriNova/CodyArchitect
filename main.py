@@ -55,7 +55,11 @@ def collect_documentation_files(codebase_dir):
 async def main(codebase_dir=None, output_dir=None):
     setup_logger("CodyArchitect", "logs")
     if codebase_dir is None:
+        # ---------------  PARSER -----------------------------
+        #
         # Create a command-line interface (CLI) for the program
+        #
+
         parser = argparse.ArgumentParser(description="CodyArchitect")
         parser.add_argument(
             "codebase_dir",
@@ -76,30 +80,45 @@ async def main(codebase_dir=None, output_dir=None):
         output_dir = args.output_dir
 
     # If the user did not provide an output directory path, create one in the codebase directory
-    if not output_dir:
+    if output_dir is None:
         output_dir = os.path.join(codebase_dir, ".codyarchitect")
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
 
+    # Get the list of documentation files in the codebase directory
     documentation_files = collect_documentation_files(codebase_dir)
 
-    cody_server, cody_agent = await init_llm(codebase_dir)
-    await new_chat(cody_agent=cody_agent)
-    analysis, analysis_formatted = await document_analysis(
-        documentation_files, cody_agent
-    )
-    with open(os.path.join(output_dir, "analysis.txt"), "w") as f:
-        f.write(analysis)
+    # ---------------- LLM Analysis -----------------------
+    #
+    # Analyze the documentation files and provide a summary
+    #
 
-    with open(os.path.join(output_dir, "analysis_formatted.json"), "w") as f:
-        json.dump(analysis_formatted, f, indent=2)
+    if True:
+        # Initialize the LLM
+        cody_server, cody_agent = await init_llm(codebase_dir)
 
-    print(f"{analysis}\n")
-    print("--- JSON ---")
-    print(f"{analysis_formatted}\n")
-    await cleanup_llm(cody_server)
+        # Analyze the documentation files via LLM
+        analysis, analysis_formatted = await document_analysis(
+            documentation_files[1:3], cody_agent
+        )
+        await cleanup_llm(cody_server)
+
+    # ----------------- Report --------------------------
+    #
+    # Write the analysis to a file
+    #
+    if True:
+        with open(os.path.join(output_dir, "analysis.txt"), "w") as f:
+            f.write(analysis)
+
+        with open(os.path.join(output_dir, "analysis_formatted.json"), "w") as f:
+            json.dump(analysis_formatted, f, indent=2)
+
+        print(f"{analysis}\n")
+        print("--- JSON ---")
+        print(f"{analysis_formatted}\n")
 
 
 if __name__ == "__main__":
-    codebase_dir = "."  # "/home/prinova/CodyProjects/cody"
+    codebase_dir = "/home/prinova/CodeProjects/cody/vscode"
     asyncio.run(main(codebase_dir, ".codyarchitect"))
