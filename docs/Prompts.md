@@ -57,9 +57,9 @@
     - "deployment_instructions"
     - "additional_resources"
 
-    2. For each key, provide the corresponding information extracted from the documentation.
+    2. For each key, provide the corresponding information extracted from the documentation very briefly.
 
-    3. If any information is missing or couldn't be extracted, set the value of the corresponding key to "UNKNOWN".
+    3. If any information is missing, couldn't be extracted or is not known, set the value of the corresponding key to "UNKNOWN".
 
     4. Ensure that the JSON object is well-formatted, with proper indentation and syntax.
 
